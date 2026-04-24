@@ -1,0 +1,179 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f5f5f5;
+  margin: 0;
+  color:rgb(17, 16, 16)
+}
+
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 40px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+}
+
+span.old {
+  text-decoration: line-through;
+  color: #941616;
+  margin-left: 10px;
+}
+
+span.new {
+  color: #0c0c0c;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+ .discount {
+  color: #6d6d6d;
+  font-size: 0.8em;
+  font-weight: bold;
+  margin-left: 5px;
+ }
+
+.carousel {
+  position: relative;
+  height: 500px;
+  overflow: hidden;
+}
+.image{
+  position: relative;
+height: 500px;
+}
+
+.slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+}
+
+.slide.active {
+  opacity: 1;
+  transition: transform 0.3s ease-in-out, opacity 0.4s ease-in-out;
+}
+
+.click-left, .click-right {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  top: 0;
+}
+
+.click-left { left: 0; }
+.click-right { right: 0; }
+
+.dots {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  text-align: center;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  background: #e0e0e0;
+  display: inline-block;
+  border-radius: 50%;
+  margin: 4px;
+}
+
+.dot.active {
+  background: #383838a1;
+}
+
+.detalhes{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.detalhes ul {
+  list-style: inside;
+  padding: 0;
+}
+
+.detalhes li {
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.desc {
+  font-size: 16px;
+  font-style: italic;
+  opacity: 0.6;
+  margin-bottom: 10px;
+  
+}
+
+select, input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 10px;
+}
+
+button {
+  width: 100%;
+  padding: 14px;
+  background: black;
+  color: white;
+  border: none;
+  cursor: pointer;
+  
+}
+button.submit {
+  background: #5f5f5fa1;
+}
+
+button#addItem {
+  background: #5f5f5fa1;
+}
+
+.item {
+  border-top: 1px solid #c5c2c2;
+  padding-top: 1px;
+  margin-top: 15px;
+}
+
+.item-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 8px;
+}
+
+.remover {
+  width: auto;           
+  padding: 0;            
+  margin-left: auto;      
+  background: none;
+  border: none;
+  color: #888888;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+#resumo {
+  margin-bottom: 20px;
+}
+
+.quantidade, #quantidadeBase {
+  width: 50px;
+}
+
+.item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* 👈 isso resolve o desalinhamento vertical */
+  gap: 10px;
+}
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #e0e0e0;
+  margin-top: 40px;
+}
