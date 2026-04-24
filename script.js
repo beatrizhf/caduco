@@ -175,7 +175,7 @@ function atualizarResumo() {
 
   total += qtdBase.value * precoUnitario;
 
-  html += `<p>${cor.value} - ${tamanho.value} (Qtd ${qtdBase.value})</p>`;
+ html += `<p>${cor.value} - ${tamanho.value} (${qtdBase.value} un.)</p>`;
 
   document.querySelectorAll(".item").forEach(item => {
     const c = item.querySelector(".cor").value;
@@ -184,7 +184,7 @@ function atualizarResumo() {
 
     total += q * precoUnitario;
 
-    html += `<p>${c} - ${t} (Qtd ${q})</p>`;
+  html += `<p>${c} - ${t} (${q} un.)</p>`;
   });
 
   html += `<strong>Total: R$ ${total.toFixed(2)}</strong>`;
@@ -208,7 +208,7 @@ function redirecionarWhats() {
 
   let total = qtd * precoUnitario;
 
-  mensagem += `${corBase} - ${tamanhoBase} (Qtd ${qtd})\n`;
+  mensagem += `${corBase} - ${tamanhoBase} (${qtd} un.)\n`;
 
   document.querySelectorAll(".item").forEach(item => {
     const c = item.querySelector(".cor").value;
@@ -217,7 +217,7 @@ function redirecionarWhats() {
 
     total += q * precoUnitario;
 
-    mensagem += `${c} - ${t} (Qtd ${q})\n`;
+    mensagem += `${c} - ${t} (${q} un.)\n`;
   });
 
   mensagem += `\nTotal: *R$ ${total.toFixed(2)}*\n\n`;
