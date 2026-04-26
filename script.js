@@ -82,22 +82,57 @@ function mudarSlide(dir) {
   atualizarCarousel();
 }
 
-function irParaSlide(i) {
-  const visiveis = getSlidesVisiveis();
-  if (slides[i].style.display === "none") return;
+// ==========================
+// CLIQUE INTELIGENTE
+// ==========================
+carousel.addEventListener("click", (e) => {
+  if (isSwiping) return;
 
-  index = visiveis.indexOf(slides[i]);
-  atualizarCarousel();
+  const rect = carousel.getBoundingClientRect();
+  const clickX = e.clientX - rect.left;
+  const width = rect.width;
+
+  const zona = width / 3;
+
+  if (clickX < zona) {
+    mudarSlide(-1);
+  } else if (clickX > width - zona) {
+    mudarSlide(1);
+  } else {
+    abrirImagem();
+  }
+});
+
+// ==========================
+// ABRIR IMAGEM
+// ==========================
+function abrirImagem() {
+  const visiveis = getSlidesVisiveis();
+  const slideAtual = visiveis[index];
+
+  if (!slideAtual) return;
+
+  const modal = document.getElementById("modal");
+  const modalImg = document.getElementById("modalImg");
+
+  modal.style.display = "flex";
+  modalImg.src = slideAtual.src;
 }
 
-document.querySelector(".click-left").onclick = () => {
-  if (!isSwiping) mudarSlide(-1);
+// fechar
+document.querySelector(".fechar").onclick = () => {
+  document.getElementById("modal").style.display = "none";
 };
 
-document.querySelector(".click-right").onclick = () => {
-  if (!isSwiping) mudarSlide(1);
+// fechar clicando fora
+document.getElementById("modal").onclick = (e) => {
+  if (e.target.id === "modal") {
+    e.target.style.display = "none";
+  }
 };
-
+// ==========================
+// SWIPE
+// ==========================
 carousel.addEventListener("touchstart", (e) => {
   isSwiping = true;
   startX = e.touches[0].clientX;
@@ -147,7 +182,7 @@ document.getElementById("addItem").onclick = () => {
       <option>PP</option><option>P</option><option>M</option><option>G</option><option>GG</option>
     </select>
 
-    <input type="number" class="quantidade" value="1">
+    <input type="number" class="quantidade" value="1" min="1">
   `;
 
   document.getElementById("carrinho").appendChild(item);
@@ -155,36 +190,41 @@ document.getElementById("addItem").onclick = () => {
   item.querySelector(".remover").onclick = () => {
     item.remove();
     atualizarResumo();
-    atualizarNumeracao(); // 👈 atualiza ao remover
+    atualizarNumeracao();
   };
 
   item.querySelectorAll("select, input").forEach(el => {
-    el.onchange = atualizarResumo;
+    el.addEventListener("change", atualizarResumo);
+    el.addEventListener("input", atualizarResumo);
   });
 
   atualizarResumo();
-  atualizarNumeracao(); // 👈 atualiza ao adicionar
+  atualizarNumeracao();
 };
 
 // ==========================
-// RESUMO
+// RESUMO (CORRIGIDO)
 // ==========================
 function atualizarResumo() {
   let total = 0;
   let html = "<h3>Resumo</h3>";
 
-  total += qtdBase.value * precoUnitario;
+  const corBase = cor.value || "-";
+  const tamanhoBase = tamanho.value || "-";
+  const qtd = parseInt(qtdBase.value) || 0;
 
- html += `<p>${cor.value} - ${tamanho.value} (${qtdBase.value} un.)</p>`;
+  total += qtd * precoUnitario;
+
+  html += `<p>${corBase} - ${tamanhoBase} (${qtd} un.)</p>`;
 
   document.querySelectorAll(".item").forEach(item => {
-    const c = item.querySelector(".cor").value;
-    const t = item.querySelector(".tamanho").value;
-    const q = item.querySelector(".quantidade").value;
+    const c = item.querySelector(".cor")?.value || "-";
+    const t = item.querySelector(".tamanho")?.value || "-";
+    const q = parseInt(item.querySelector(".quantidade")?.value) || 0;
 
     total += q * precoUnitario;
 
-  html += `<p>${c} - ${t} (${q} un.)</p>`;
+    html += `<p>${c} - ${t} (${q} un.)</p>`;
   });
 
   html += `<strong>Total: R$ ${total.toFixed(2)}</strong>`;
@@ -204,7 +244,7 @@ function redirecionarWhats() {
 
   const corBase = cor.value;
   const tamanhoBase = tamanho.value;
-  const qtd = qtdBase.value;
+  const qtd = parseInt(qtdBase.value) || 0;
 
   let total = qtd * precoUnitario;
 
@@ -213,14 +253,14 @@ function redirecionarWhats() {
   document.querySelectorAll(".item").forEach(item => {
     const c = item.querySelector(".cor").value;
     const t = item.querySelector(".tamanho").value;
-    const q = item.querySelector(".quantidade").value;
+    const q = parseInt(item.querySelector(".quantidade").value) || 0;
 
     total += q * precoUnitario;
 
     mensagem += `${c} - ${t} (${q} un.)\n`;
   });
 
-  mensagem += `\nTotal: *R$ ${total.toFixed(2)}*\n\n`;
+  mensagem += `\nTotal no PIX: *R$ ${total.toFixed(2)}*\n\n`;
   mensagem += `Aguardo o link de pagamento 🤪`;
 
   const numero = "47999942225";
