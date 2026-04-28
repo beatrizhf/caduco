@@ -6,113 +6,106 @@
     <title>Camiseta — Pré-venda</title>
     <link rel="stylesheet" href="style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <div id="modal" class="modal">
-  <span class="fechar">&times;</span>
-  <img id="modalImg">
-</div>
+
+    </div>
 </head>
 
 <body>
 
-    <div class="header">
-    <div>𓆝 𓆟 𓆞</div>
-  </div>
+        <div class="container">
+            <div class="grid">
 
-    <div class="container">
-        <div class="grid">
+                <!-- IMAGEM -->
+                <div class="image">
+                    <div class="carousel" id="carousel">
 
-            <!-- IMAGEM -->
-            <div class="image">
-                <div class="carousel" id="carousel">
+                        <div class="slides">
+                            <img src="camisa frente lateral.png" class="slide active" data-cor="vermelho">
+                            <img src="camisa costas vermelha.png" class="slide" data-cor="vermelho">
+                            <img src="camisa frente central azul.png" class="slide" data-cor="azul">
+                            <img src="camisa costas azul.png" class="slide" data-cor="azul">
+                        </div>
 
-                    <div class="slides">
-                        <img src="camisa frente lateral.png" class="slide active" data-cor="vermelho">
-                        <img src="camisa costas vermelha.png" class="slide" data-cor="vermelho">
-                        <img src="camisa frente central azul.png" class="slide" data-cor="azul">
-                        <img src="camisa costas azul.png" class="slide" data-cor="azul">
+                        <div class="click-left"></div>
+                        <div class="click-right"></div>
+
+                        <div class="arrow left">‹</div>
+                        <div class="arrow right">›</div>
+
+                        <div class="dots">
+                            <span class="dot active" onclick="irParaSlide(0)"></span>
+                            <span class="dot" onclick="irParaSlide(1)"></span>
+                            <span class="dot" onclick="irParaSlide(2)"></span>
+                            <span class="dot" onclick="irParaSlide(3)"></span>
+                        </div>
+
                     </div>
+                </div>
 
-                    <div class="click-left"></div>
-                    <div class="click-right"></div>
+                <!-- INFO -->
+                <div class="info">
+                    <h1><strong>PRÉ-VENDA | </strong>CAMISETA DESIGN 2026 - EDIÇÃO LIMITADA</h1>
 
-                    <div class="arrow left">‹</div>
-                    <div class="arrow right">›</div>
-
-                    <div class="dots">
-                        <span class="dot active" onclick="irParaSlide(0)"></span>
-                        <span class="dot" onclick="irParaSlide(1)"></span>
-                        <span class="dot" onclick="irParaSlide(2)"></span>
-                        <span class="dot" onclick="irParaSlide(3)"></span>
+                    <div class="price">
+                        <span class="old">R$76,90</span>
+                        <span class="new">R$69,90</span><span class="discount">(no pix)</span>
                     </div>
+                    <div class="detalhes">
+                        <p class="desc">Detalhes da peça:</p>
+                        <ul>
+                            <li>Modelagem OVERSIZED</li>
+                            <li>80% algodão de alta gramatura</li>
+                            <li>Cor Off-White (sem transparência)</li>
+                            <li>Estampa em serigrafia</li>
+                        </ul>
+
+                    </div>
+                    <form id="pedidoForm">
+                        <label>Cor</label>
+                        <select id="cor">
+                            <option value="" selected disabled>Selecione a cor</option>
+                            <option>Off-White + Vermelho</option>
+                            <option>Off-White + Azul</option>
+                        </select>
+
+                        <label>Tamanho</label>
+                        <select id="tamanho">
+                            <option>PP</option>
+                            <option>P</option>
+                            <option>M</option>
+                            <option>G</option>
+                            <option>GG</option>
+                        </select>
+
+                        <!-- CARRINHO -->
+                        <div id="carrinho"></div>
+                        <button type="button" id="addItem">+ adicionar outra peça</button>
+
+                        <!-- RESUMO -->
+                        <div id="resumo"></div>
+
+                        <!-- hidden -->
+                        <input name="entry.382958934" placeholder="Nome completo" required>
+                        <input name="entry.264914806" type="email" placeholder="Email" required>
+                        <input name="entry.706782334" placeholder="WhatsApp" required>
+
+                        <input type="hidden" name="entry.236354104" id="resumoInput">
+                        <input type="hidden" name="entry.1970057357" id="totalInput">
+
+                        <button type="submit">FINALIZAR E SOLICITAR PAGAMENTO</button>
+
+                    </form>
+
 
                 </div>
-            </div>
-
-            <!-- INFO -->
-            <div class="info">
-                <h1><strong>PRÉ-VENDA | </strong>CAMISETA DESIGN 2026 - EDIÇÃO LIMITADA</h1>
-
-                <div class="price">
-                    <span class="old">R$76,90</span>
-                    <span class="new">R$69,90</span><span class="discount">(no pix)</span>
-                </div>
-            <div class="detalhes">
-                <p class="desc">Detalhes da peça:</p>
-                <ul>
-                    <li>Modelagem OVERSIZED</li>
-                    <li>80% algodão de alta gramatura</li>
-                    <li>Cor Off-White (sem transparência)</li>
-                    <li>Estampa em serigrafia</li>
-                </ul>
-            </div>
-                <form action="https://docs.google.com/forms/d/e/1FAIpQLSfKg0pFvwNUL3E4FSgQYMy6xlZKTk6tWZAD0yCrDi8l0wpmiQ/formResponse" method="POST"
-                    onsubmit="redirecionarWhats()">
-
-                    <label>Cor</label>
-                    <select id="cor">
-                        <option value="" selected disabled>Selecione a cor</option>
-                        <option>Off-White + Vermelho</option>
-                        <option>Off-White + Azul</option>
-                    </select>
-
-                    <label>Tamanho</label>
-                    <select id="tamanho">
-                        <option>PP</option>
-                        <option>P</option>
-                        <option>M</option>
-                        <option>G</option>
-                        <option>GG</option>
-                    </select>
-
-                    <!-- hidden -->
-                    <input name="entry.444444444" id="corInput" type="hidden">
-                    <input name="entry.555555555" id="tamanhoInput" type="hidden">
-
-                    <!-- CARRINHO -->
-                    <div id="carrinho"></div>
-                    <button type="button" id="addItem">+ adicionar outra peça</button>
-
-                    <!-- RESUMO -->
-                    <div id="resumo"></div>
-
-                    <!-- CLIENTE -->
-                    <input name="entry.111111111" placeholder="Nome completo" required>
-                    <input name="entry.222222222" type="email" placeholder="Email" required>
-                    <input name="entry.333333333" placeholder="WhatsApp" required>
-
-                    <button type="submit">FINALIZAR E SOLICITAR PAGAMENTO</button>
-
-                </form>
-
 
             </div>
-
         </div>
-    </div>
 
-    <script src="script.js"></script>
-    <footer>
-        &copy; 2026 CADuco | FURB
-    </footer>
-    </body>
+        <script src="script.js"></script>
+        <footer>
+            &copy; 2026 CADuco | FURB
+        </footer>
+</body>
+
 </html>

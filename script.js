@@ -30,61 +30,24 @@ const carousel = document.getElementById("carousel");
 let isSwiping = false;
 let startX = 0;
 
-function aplicarFiltroCor() {
-  if (!cor.value) {
-    slides.forEach(slide => slide.style.display = "block");
-    index = 0;
-    atualizarCarousel();
-    return;
-  }
-
-  let corSelecionada = cor.value.includes("Vermelho") ? "vermelho" : "azul";
-
-  slides.forEach(slide => {
-    if (slide.dataset.cor === corSelecionada) {
-      slide.style.display = "block";
-    } else {
-      slide.style.display = "none";
-      slide.classList.remove("active");
-    }
-  });
-
-  index = 0;
-  atualizarCarousel();
-}
-
-function getSlidesVisiveis() {
-  return Array.from(slides).filter(s => s.style.display !== "none");
-}
-
 function atualizarCarousel() {
-  const visiveis = getSlidesVisiveis();
-
   slides.forEach(s => s.classList.remove("active"));
   dots.forEach(d => d.classList.remove("active"));
 
-  if (visiveis.length === 0) return;
-
-  visiveis[index].classList.add("active");
-
-  const realIndex = Array.from(slides).indexOf(visiveis[index]);
-  if (dots[realIndex]) dots[realIndex].classList.add("active");
+  slides[index].classList.add("active");
+  if (dots[index]) dots[index].classList.add("active");
 }
 
 function mudarSlide(dir) {
-  const visiveis = getSlidesVisiveis();
-
   index += dir;
 
-  if (index < 0) index = visiveis.length - 1;
-  if (index >= visiveis.length) index = 0;
+  if (index < 0) index = slides.length - 1;
+  if (index >= slides.length) index = 0;
 
   atualizarCarousel();
 }
 
-// ==========================
-// CLIQUE INTELIGENTE
-// ==========================
+// clique lateral
 carousel.addEventListener("click", (e) => {
   if (isSwiping) return;
 
@@ -92,47 +55,11 @@ carousel.addEventListener("click", (e) => {
   const clickX = e.clientX - rect.left;
   const width = rect.width;
 
-  const zona = width / 3;
-
-  if (clickX < zona) {
-    mudarSlide(-1);
-  } else if (clickX > width - zona) {
-    mudarSlide(1);
-  } else {
-    abrirImagem();
-  }
+  if (clickX < width / 2) mudarSlide(-1);
+  else mudarSlide(1);
 });
 
-// ==========================
-// ABRIR IMAGEM
-// ==========================
-function abrirImagem() {
-  const visiveis = getSlidesVisiveis();
-  const slideAtual = visiveis[index];
-
-  if (!slideAtual) return;
-
-  const modal = document.getElementById("modal");
-  const modalImg = document.getElementById("modalImg");
-
-  modal.style.display = "flex";
-  modalImg.src = slideAtual.src;
-}
-
-// fechar
-document.querySelector(".fechar").onclick = () => {
-  document.getElementById("modal").style.display = "none";
-};
-
-// fechar clicando fora
-document.getElementById("modal").onclick = (e) => {
-  if (e.target.id === "modal") {
-    e.target.style.display = "none";
-  }
-};
-// ==========================
-// SWIPE
-// ==========================
+// swipe mobile
 carousel.addEventListener("touchstart", (e) => {
   isSwiping = true;
   startX = e.touches[0].clientX;
@@ -148,7 +75,7 @@ carousel.addEventListener("touchend", (e) => {
 });
 
 // ==========================
-// NUMERAÇÃO DINÂMICA
+// NUMERAÇÃO
 // ==========================
 function atualizarNumeracao() {
   const itens = document.querySelectorAll(".item");
@@ -203,87 +130,84 @@ document.getElementById("addItem").onclick = () => {
 };
 
 // ==========================
-// RESUMO (CORRIGIDO)
+// RESUMO
 // ==========================
 function atualizarResumo() {
   let total = 0;
-  let html = "<h3>Resumo</h3>";
+  let resumoTexto = "";
 
-  const corBase = cor.value || "-";
-  const tamanhoBase = tamanho.value || "-";
-  const qtd = parseInt(qtdBase.value) || 0;
-
-  total += qtd * precoUnitario;
-
-  html += `<p>${corBase} - ${tamanhoBase} (${qtd} un.)</p>`;
-
-  document.querySelectorAll(".item").forEach(item => {
-    const c = item.querySelector(".cor")?.value || "-";
-    const t = item.querySelector(".tamanho")?.value || "-";
-    const q = parseInt(item.querySelector(".quantidade")?.value) || 0;
-
-    total += q * precoUnitario;
-
-    html += `<p>${c} - ${t} (${q} un.)</p>`;
-  });
-
-  html += `<strong>Total: R$ ${total.toFixed(2)}</strong>`;
-
-  document.getElementById("resumo").innerHTML = html;
-}
-
-// ==========================
-// WHATSAPP
-// ==========================
-function redirecionarWhats() {
-  const nome = document.querySelector('input[name="entry.111111111"]').value;
-
-  let mensagem = `*Olá! Acabei de realizar um pedido.*\n\n`;
-  mensagem += `Nome: ${nome}\n\n`;
-  mensagem += `*Resumo*\n`;
-
-  const corBase = cor.value;
-  const tamanhoBase = tamanho.value;
-  const qtd = parseInt(qtdBase.value) || 0;
-
-  let total = qtd * precoUnitario;
-
-  mensagem += `${corBase} - ${tamanhoBase} (${qtd} un.)\n`;
+  total += qtdBase.value * precoUnitario;
+  resumoTexto += `${cor.value} - ${tamanho.value} (${qtdBase.value} un.)\n`;
 
   document.querySelectorAll(".item").forEach(item => {
     const c = item.querySelector(".cor").value;
     const t = item.querySelector(".tamanho").value;
-    const q = parseInt(item.querySelector(".quantidade").value) || 0;
+    const q = item.querySelector(".quantidade").value;
 
     total += q * precoUnitario;
-
-    mensagem += `${c} - ${t} (${q} un.)\n`;
+    resumoTexto += `${c} - ${t} (${q} un.)\n`;
   });
 
-  mensagem += `\nTotal no PIX: *R$ ${total.toFixed(2)}*\n\n`;
+  document.getElementById("resumo").innerHTML =
+    `<h3>Resumo</h3><pre>${resumoTexto}</pre><strong>Total: R$ ${total.toFixed(2)}</strong>`;
+
+  document.getElementById("resumoInput").value = resumoTexto;
+  document.getElementById("totalInput").value = total.toFixed(2);
+}
+
+// ==========================
+// SUBMIT (WHATS + FORMS)
+// ==========================
+document.getElementById("pedidoForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  atualizarResumo();
+
+  // ==========================
+  // WHATSAPP PRIMEIRO (CRÍTICO)
+  // ==========================
+  const nome = document.querySelector('[name="entry.382958934"]').value;
+
+  let mensagem = `*Olá! Acabei de realizar um pedido.*\n\n`;
+  mensagem += `Nome: ${nome}\n\n`;
+  mensagem += `*Resumo*\n`;
+  mensagem += document.getElementById("resumoInput").value;
+  mensagem += `\nTotal no PIX: *R$ ${document.getElementById("totalInput").value}*\n\n`;
   mensagem += `Aguardo o link de pagamento 🤪`;
 
   const numero = "47999942225";
 
-  const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  const link = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
 
-  const url = isMobile
-    ? `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`
-    : `https://web.whatsapp.com/send?phone=${numero}&text=${encodeURIComponent(mensagem)}`;
+  // abre imediatamente (evita bloqueio)
+  window.open(link, "_blank");
 
-  window.open(url, "_blank");
-}
+  // ==========================
+  // ENVIA PRO FORMS (depois)
+  // ==========================
+  const url = "https://docs.google.com/forms/d/e/1FAIpQLSfKg0pFvwNUL3E4FSgQYMy6xlZKTk6tWZAD0yCrDi8l0wpmiQ/formResponse";
+
+  const data = new FormData();
+
+  data.append("entry.382958934", nome);
+  data.append("entry.264914806", document.querySelector('[name="entry.264914806"]').value);
+  data.append("entry.706782334", document.querySelector('[name="entry.706782334"]').value);
+  data.append("entry.236354104", document.getElementById("resumoInput").value);
+  data.append("entry.1970057357", document.getElementById("totalInput").value);
+
+  fetch(url, {
+    method: "POST",
+    mode: "no-cors",
+    body: data
+  });
+});
 
 // ==========================
 // INIT
 // ==========================
-cor.addEventListener("change", () => {
-  aplicarFiltroCor();
-  atualizarResumo();
-});
-
+cor.addEventListener("change", atualizarResumo);
 tamanho.addEventListener("change", atualizarResumo);
 qtdBase.addEventListener("input", atualizarResumo);
 
-aplicarFiltroCor();
+atualizarCarousel();
 atualizarResumo();

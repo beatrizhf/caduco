@@ -32,7 +32,6 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 60px;
-    margin-top: 25px;
 }
 
 .info {
@@ -61,13 +60,13 @@ span.new {
 .carousel {
     position: relative;
     aspect-ratio: 4 / 5;
-    margin-top: 25px;
 
 }
 
 .image {
     position: relative;
     height: 600px;
+    margin-top: 25px;
 }
 
 .slide {
@@ -225,6 +224,10 @@ button#addItem {
     padding-left: 10px;
 }
 
+#resumo pre {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 .quantidade,
 #quantidadeBase {
     width: 50px;
@@ -351,6 +354,7 @@ footer {
     padding: 14px;
     border-radius: 3px;
     width: 100%;
+    margin-top: 6px;
   }
 
   input {
