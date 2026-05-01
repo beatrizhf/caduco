@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background: #f5f5f5;
+    background: #f6f6f0;
     margin: 0;
     color: rgb(17, 16, 16)
 }
@@ -41,12 +41,12 @@ body {
 span.old {
     text-decoration: line-through;
     color: #941616;
-    font-size: 0.9em;
+    font-size: 1.1em;
 }
 
 span.new {
     color: #0c0c0c;
-    font-size: 1.3em;
+    font-size: 1.4em;
     font-weight: bold;
 }
 
@@ -60,7 +60,6 @@ span.new {
 .carousel {
     position: relative;
     aspect-ratio: 4 / 5;
-
 }
 
 .image {
@@ -75,11 +74,15 @@ span.new {
     height: 100%;
     object-fit: cover;
     opacity: 0;
+    border: 1px solid #454545;
 }
+
 
 .slide.active {
     opacity: 1;
-    transition: transform 0.3s ease-in-out, opacity 0.4s ease-in-out;
+    overflow-x: auto; 
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
 }
 
 .click-left,
@@ -88,7 +91,7 @@ span.new {
   width: 50%;
   height: 100%;
   top: 0;
-  z-index: 2; /* 👈 abaixo das setas */
+  z-index: 2; 
 }
 
 .click-left {
@@ -103,8 +106,8 @@ span.new {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  z-index: 3; /* 👈 fica acima das áreas de clique */
-  pointer-events: none; /* 👈 mantém clique funcionando nas áreas invisíveis */
+  z-index: 3; 
+  pointer-events: none; 
 }
 
 .arrow.left {
@@ -187,7 +190,7 @@ button.submit {
 }
 
 button#addItem {
-    background: #5f5f5fa1;
+    background: #949087a1;
     border-radius: 3px;
 }
 
@@ -216,7 +219,7 @@ button#addItem {
 
 #resumo {
     margin-bottom: 20px;
-    background-color: #5d5d5d21;
+    background-color: #8d888221;
     padding: 5px;
     border-radius: 3px;
     margin-top: 15px;
@@ -308,6 +311,7 @@ footer {
   height: auto;
   margin: 0;
   padding: 0;
+  margin-bottom: 10px;
 }
 
   .carousel {
