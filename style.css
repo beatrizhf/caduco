@@ -117,10 +117,12 @@ span.new {
 .dot {
     width: 8px;
     height: 8px;
-    background: #efefef9a;
-    display: inline-block;
+    background: #d9d7d4a5;
+    display: inline-flex;
+    justify-content: space-evenly;
     border-radius: 50%;
     margin: 4px;
+    position: relative;
 }
 
 .dot.active {
@@ -217,7 +219,7 @@ input {
     margin-bottom: 10px;
     background-color: var(--cor-secundaria);
     color: var(--cor-primaria);
-    border: solid 1px var(--cor-primaria);
+    border: solid 1px var(--cor-primaria) !important;
 }
 
 button {
@@ -254,6 +256,10 @@ input[type="number"]:hover::-webkit-inner-spin-button {
     font-size: 0.8em;
     color: #454545;
     line-height: 0.5em;
+}
+
+#carousel {
+  touch-action: pan-y;
 }
 
 .item {
@@ -385,6 +391,12 @@ footer {
     object-fit: cover;
     width: 100%;
     height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    opacity: 0;
   }
 
   form{
@@ -427,11 +439,11 @@ footer {
     border-radius: 3px;
     width: 92%;
     background-color: var(--cor-secundaria);
+    border: solid 1px var(--cor-primaria) !important;
+
   }
 
   input:-webkit-autofill {
-    background-color: var(--cor-secundaria) !important;
-    -webkit-box-shadow: 0 0 0px 1000px var(--cor-secundaria) inset !important;
     -webkit-text-fill-color: var(--cor-primaria)
   }
 
