@@ -1,7 +1,7 @@
 // ==========================
 // CONFIG
 // ==========================
-const precoUnitario = 69.90;
+const precoUnitario = 73.90;
 
 // ==========================
 // ELEMENTOS BASE
@@ -175,7 +175,7 @@ document.getElementById("pedidoForm").addEventListener("submit", function(e) {
   mensagem += `\nTotal no PIX: *R$ ${document.getElementById("totalInput").value}*\n\n`;
   mensagem += `Aguardo o link de pagamento 🤪`;
 
-  const numero = "47999942225";
+  const numero = "47984083582";
 
   const link = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
 

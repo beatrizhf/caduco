@@ -1,26 +1,16 @@
+:root {
+    --cor-primaria: #171717;
+    --cor-secundaria: #f6f6f0;
+}
+
+
+
 body {
     font-family: Arial, sans-serif;
-    background: #f6f6f0;
+    background: var(--cor-secundaria);
     margin: 0;
-    color: rgb(17, 16, 16)
+    color: rgb(17, 16, 16);
 }
-
-/* HEADER */
-.header {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  height: 60px;
-  background: #171717;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0 15px;
-  z-index: 1000;
-  color: #ffffff;
-  margin-bottom: 10px;
-}
-
 
 .container {
     max-width: 1100px;
@@ -41,25 +31,24 @@ body {
 span.old {
     text-decoration: line-through;
     color: #941616;
-    font-size: 1.1em;
+    font-size: 1.2em;
 }
 
 span.new {
-    color: #0c0c0c;
+    color: var(--cor-primaria);
     font-size: 1.4em;
     font-weight: bold;
 }
 
 .discount {
     color: #6d6d6d;
-    font-size: 0.8em;
-    font-weight: bold;
-    margin-left: 5px;
+    font-size: 0.9em;
+    margin-left: 1px;
 }
 
 .carousel {
     position: relative;
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 4/5;
 }
 
 .image {
@@ -135,7 +124,7 @@ span.new {
 }
 
 .dot.active {
-    background: #565454b8;
+    background: #87867cc6;
 }
 
 .detalhes {
@@ -153,12 +142,63 @@ span.new {
     font-size: 14px;
 }
 
+/* TABELA DE MEDIDAS */
+
+.accordion{
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  margin: 24px 0;
+}
+
+.accordion summary{
+  list-style: none;
+  cursor: pointer;
+
+  padding: 18px 0;
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  font-size:16px;
+  font-weight:500;
+}
+
+/* remove seta padrão */
+.accordion summary::-webkit-details-marker{
+  display:none;
+}
+
+/* adiciona + */
+.accordion summary::after{
+  content:"+";
+  font-size:24px;
+  transition:.3s;
+  margin-right: 15px;
+  color: var(--cor-primaria);
+}
+
+/* vira x */
+.accordion[open] summary::after{
+  transform: rotate(45deg);
+}
+
+.accordion-content{
+  padding-bottom:20px;
+  display: flex;
+  justify-content: center;
+}
+
+.accordion-content img{
+  width:80%;
+  max-width:500px;
+}
+
 .desc {
-    font-size: 1em;
-    font-style: italic;
-    opacity: 1;
+    font-size: 1.1em;
     font-weight: bolder;
     margin-bottom: 10px;
+    margin-top: 30px;
 
 }
 
@@ -166,32 +206,54 @@ select{
     width: 100%;
     padding: 12px;
     margin-bottom: 10px;
+    background-color: var(--cor-secundaria);
+    color: var(--cor-primaria);
+    cursor: pointer;
 }
 
 input {
     width: 94%;
     padding: 12px;
     margin-bottom: 10px;
+    background-color: var(--cor-secundaria);
+    color: var(--cor-primaria);
+    border: solid 1px var(--cor-primaria);
 }
 
 button {
     width: 100%;
     padding: 14px;
-    background: black;
-    color: white;
+    background: var(--cor-primaria);
+    color: var(--cor-secundaria);
     border: none;
     cursor: pointer;
 
 }
 
-button.submit {
-    background: #5f5f5fa1;
+button#addItem {
+    
+    background-color: var(--cor-secundaria);
+    color:var(--cor-primaria);
+    border: solid 1px var(--cor-primaria);
     border-radius: 3px;
 }
 
-button#addItem {
-    background: #949087a1;
+input[type="number"]::-webkit-inner-spin-button {
+  opacity: 1;
+}
+
+input[type="number"]:hover::-webkit-inner-spin-button {
+  opacity: 1;
+}
+
+.obs {
+    background-color: #c7c5b962;
+    padding: 10px;
     border-radius: 3px;
+    margin-top: 15px;
+    font-size: 0.8em;
+    color: #454545;
+    line-height: 0.5em;
 }
 
 .item {
@@ -219,7 +281,7 @@ button#addItem {
 
 #resumo {
     margin-bottom: 20px;
-    background-color: #8d888221;
+    background-color: #c7c5b962;
     padding: 5px;
     border-radius: 3px;
     margin-top: 15px;
@@ -240,7 +302,6 @@ button#addItem {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* 👈 isso resolve o desalinhamento vertical */
     gap: 10px;
 }
 
@@ -288,7 +349,7 @@ footer {
 
   /* RESET BASE DO APP */
   body {
-    background: #fff;
+    background: #f6f6f0;
   }
 
   .container {
@@ -297,15 +358,13 @@ footer {
     margin: 0;
   }
 
-
-  /* 🔥 vira UMA coluna real */
   .grid {
     display: flex;
     flex-direction: column;
     gap: 0;
+    background-color: #f6f6f0;
   }
 
-  /* 🔥 HERO (imagem estilo app) */
   .image {
   width: 100%;
   height: auto;
@@ -330,21 +389,22 @@ footer {
 
   form{
     margin-bottom: -35px;
+    background-color: var(--cor-secundaria);
   }
 
-  /* INFO vira “sheet” abaixo da imagem */
   .info {
     padding: 20px 18px;
-    background: #fff;
+    background: var(--cor-secundaria);
     border-radius: 18px 18px 0 0;
     margin-top: -20px;
     position: relative;
     z-index: 2;
+    background-color: var(--cor-secundaria);
   }
 
   /* tipografia mais editorial */
   h1 {
-    font-size: 20px;
+    font-size: 1.4em;
     line-height: 1.25;
   }
 
@@ -352,13 +412,13 @@ footer {
     margin: 12px 0 18px;
   }
 
-  /* formulário mais “app native” */
   select {
     font-size: 16px;
     padding: 14px;
     border-radius: 3px;
     width: 100%;
     margin-top: 6px;
+    background-color: var(--cor-secundaria);
   }
 
   input {
@@ -366,20 +426,23 @@ footer {
     padding: 14px;
     border-radius: 3px;
     width: 92%;
+    background-color: var(--cor-secundaria);
+  }
+
+  input:-webkit-autofill {
+    background-color: var(--cor-secundaria) !important;
+    -webkit-box-shadow: 0 0 0px 1000px var(--cor-secundaria) inset !important;
+    -webkit-text-fill-color: var(--cor-primaria)
   }
 
 #resumo {
     border-radius: 3px;
   }
 
-  /* carrinho estilo card */
   .item {
-    background: #fafafa;
-    border-radius: 12px;
+    background-color: var(--cor-secundaria);
     padding: 10px;
   }
-
-  /* botão fixo principal */
 
   button[type="submit"] {
     position: fixed;
