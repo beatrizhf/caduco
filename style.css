@@ -10,6 +10,7 @@ body {
     background: var(--cor-secundaria);
     margin: 0;
     color: rgb(17, 16, 16);
+    touch-action: pan-y;
 }
 
 .container {
@@ -65,7 +66,6 @@ span.new {
     opacity: 0;
     border: 1px solid #454545;
 }
-
 
 .slide.active {
     opacity: 1;
@@ -233,7 +233,6 @@ button {
 }
 
 button#addItem {
-    
     background-color: var(--cor-secundaria);
     color:var(--cor-primaria);
     border: solid 1px var(--cor-primaria);
@@ -241,7 +240,7 @@ button#addItem {
 }
 
 input[type="number"]::-webkit-inner-spin-button {
-  opacity: 1;
+  opacity: 0;
 }
 
 input[type="number"]:hover::-webkit-inner-spin-button {
@@ -431,6 +430,14 @@ footer {
     width: 100%;
     margin-top: 6px;
     background-color: var(--cor-secundaria);
+    box-shadow: none;
+outline: none;
+-webkit-appearance: none;
+-moz-appearance: none;
+appearance: none;
+
+    border: solid 1px var(--cor-primaria) !important;
+
   }
 
   input {
