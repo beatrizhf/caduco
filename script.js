@@ -24,6 +24,27 @@ tamanho.after(qtdBase);
 let index = 0;
 
 const slides = document.querySelectorAll(".slide");
+const dotsContainer = document.querySelector(".dots");
+
+// cria dots automaticamente
+slides.forEach((_, i) => {
+  const dot = document.createElement("span");
+
+  dot.classList.add("dot");
+
+  if (i === 0) {
+    dot.classList.add("active");
+  }
+
+  dot.addEventListener("click", () => {
+    index = i;
+    atualizarCarousel();
+  });
+
+  dotsContainer.appendChild(dot);
+});
+
+// agora pega todos os dots criados
 const dots = document.querySelectorAll(".dot");
 const carousel = document.getElementById("carousel");
 
