@@ -1,41 +1,29 @@
-// ==========================
-// CONFIG
-// ==========================
-const precoUnitario = 73.90;
 
-// ==========================
-// ELEMENTOS BASE
-// ==========================
+const precoUnitario = 73.90;
 const cor = document.getElementById("cor");
 const tamanho = document.getElementById("tamanho");
-
-// quantidade base
 const qtdBase = document.createElement("input");
 qtdBase.type = "number";
 qtdBase.min = 1;
 qtdBase.value = 1;
 qtdBase.id = "quantidadeBase";
-
 tamanho.after(qtdBase);
 
 // ==========================
 // CARROSSEL
 // ==========================
 let index = 0;
-
 const slides = document.querySelectorAll(".slide");
 const dotsContainer = document.querySelector(".dots");
 
-// cria dots automaticamente
 slides.forEach((_, i) => {
   const dot = document.createElement("span");
 
   dot.classList.add("dot");
-
-  if (i === 0) {
+  if (i === 0) 
+    {
     dot.classList.add("active");
   }
-
   dot.addEventListener("click", () => {
     index = i;
     atualizarCarousel();
@@ -44,7 +32,6 @@ slides.forEach((_, i) => {
   dotsContainer.appendChild(dot);
 });
 
-// agora pega todos os dots criados
 const dots = document.querySelectorAll(".dot");
 const carousel = document.getElementById("carousel");
 
@@ -68,7 +55,6 @@ function mudarSlide(dir) {
   atualizarCarousel();
 }
 
-// clique lateral
 carousel.addEventListener("click", (e) => {
   if (isSwiping) return;
 
@@ -80,7 +66,6 @@ carousel.addEventListener("click", (e) => {
   else mudarSlide(1);
 });
 
-// swipe mobile
 carousel.addEventListener("touchstart", (e) => {
   isSwiping = true;
   startX = e.touches[0].clientX;
@@ -95,9 +80,6 @@ carousel.addEventListener("touchend", (e) => {
   setTimeout(() => isSwiping = false, 100);
 });
 
-// ==========================
-// NUMERAÇÃO
-// ==========================
 function atualizarNumeracao() {
   const itens = document.querySelectorAll(".item");
 
@@ -108,7 +90,7 @@ function atualizarNumeracao() {
 }
 
 // ==========================
-// CARRINHO
+// ADICIONA PEÇA
 // ==========================
 document.getElementById("addItem").onclick = () => {
 
@@ -134,7 +116,6 @@ document.getElementById("addItem").onclick = () => {
   `;
 
   document.getElementById("carrinho").appendChild(item);
-
   item.querySelector(".remover").onclick = () => {
     item.remove();
     atualizarResumo();
@@ -181,12 +162,8 @@ function atualizarResumo() {
 // ==========================
 document.getElementById("pedidoForm").addEventListener("submit", function(e) {
   e.preventDefault();
-
   atualizarResumo();
 
-  // ==========================
-  // WHATSAPP PRIMEIRO (CRÍTICO)
-  // ==========================
   const nome = document.querySelector('[name="entry.382958934"]').value;
 
   let mensagem = `*Olá! Acabei de realizar um pedido.*\n\n`;
@@ -200,12 +177,8 @@ document.getElementById("pedidoForm").addEventListener("submit", function(e) {
 
   const link = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
 
-  // abre imediatamente (evita bloqueio)
   window.open(link, "_blank");
 
-  // ==========================
-  // ENVIA PRO FORMS (depois)
-  // ==========================
   const url = "https://docs.google.com/forms/d/e/1FAIpQLSfKg0pFvwNUL3E4FSgQYMy6xlZKTk6tWZAD0yCrDi8l0wpmiQ/formResponse";
 
   const data = new FormData();
@@ -222,10 +195,6 @@ document.getElementById("pedidoForm").addEventListener("submit", function(e) {
     body: data
   });
 });
-
-// ==========================
-// INIT
-// ==========================
 cor.addEventListener("change", atualizarResumo);
 tamanho.addEventListener("change", atualizarResumo);
 qtdBase.addEventListener("input", atualizarResumo);
